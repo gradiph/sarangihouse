@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/login/kakao', 'KakaoController@redirectToProvider')->name('login.kakao');
+Route::get('/kakao_oauth', 'KakaoController@handleProviderCallback');

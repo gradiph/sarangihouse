@@ -19,5 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/login/kakao', 'KakaoController@redirectToProvider')->name('login.kakao');
-Route::get('/login-kakao-callback', 'KakaoController@handleProviderCallback');
+//Route::get('/login/kakao', 'KakaoController@redirectToProvider')->name('login.kakao');
+//Route::get('/kakao_oauth', 'KakaoController@handleProviderCallback');
