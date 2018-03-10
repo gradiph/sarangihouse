@@ -8,6 +8,17 @@
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body">
+                    @isset($alert_type)
+                    	@component('alert')
+                    		@slot('type')
+                    			{{ $alert_type }}
+                    		@endslot
+                    		@slot('title')
+                    			{{ $alert_title }}
+                    		@endslot
+                    		{{ $alert_messages }}
+                    	@endcomponent
+                    @endif
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

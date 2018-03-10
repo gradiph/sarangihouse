@@ -1,4 +1,4 @@
-@extends('layouts.base.guest')
+@extends('layouts.base.admin')
 
 @section('title')
 @endsection
