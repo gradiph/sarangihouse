@@ -1,31 +1,40 @@
+.bg-main {
+	background-color: rgb(142, 176, 55) !important;
+}
+
 .btn-main {
 	color: #fff;
 	background-color: rgb(142, 176, 55) !important;
 	border-color: rgb(142, 176, 55) !important;
 }
 
-.btn-main:hover {
+.btn-main:hover, .btn-soft-main:hover, .btn-main.active, .btn-soft-main.active {
 	color: #fff;
 	background-color: rgb(128, 159, 50) !important;
 	border-color: rgb(116, 144, 45) !important;
 }
 
+.bg-soft-main {
+	background-color: rgb(172, 206, 85) !important;
+}
+
+.btn-soft-main {
+	color: #fff;
+	background-color: rgb(172, 206, 85) !important;
+	border-color: rgb(172, 206, 85) !important;
+}
+
 .navbar-brand {
 	font-family: HoonWhitecatR;
-	font-size: 5em;
+	font-size: 3em;
 	color: rgb(142, 176, 55) !important;
+	line-height: 50%;
 /*	text-shadow: rgba(0, 0, 0, 0.298039) 2px 4px 3px; */
 	letter-spacing: 2px;
 	text-transform: none;
 	font-weight: bold;
 	font-style: normal;
 	text-decoration: none;
-}
-
-@media only screen and (max-width: 575px) {
-	.navbar-brand {
-		font-size: 17vw;
-	}
 }
 
 #navbarToggler .nav-link {
@@ -35,14 +44,6 @@
 	color: white;
 	margin-left: 4px;
 	background-color: rgb(142, 176, 55) !important;
-}
-
-#menu-nav {
-	margin-right: 4px;
-}
-
-#user-nav {
-	border-left: 1px solid black;
 }
 
 #promo {

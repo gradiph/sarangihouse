@@ -22,7 +22,13 @@ Route::get('/login/kakao', 'KakaoController@redirectToProvider')->name('login.ka
 Route::get('/kakao_oauth', 'KakaoController@handleProviderCallback');
 
 Route::middleware(['auth.admin'])->prefix('admin')->name('admin.')->group(function() {
+	Route::get('/', 'AdminController@index');
 	Route::get('/home', 'AdminController@home')->name('home');
+
+	Route::prefix('products')->name('product.')->group(function() {
+		Route::get('/list', 'ProductController')->name('list');
+	});
+	Route::resource('/products', 'ProductController');
 });
 
 Route::middleware(['auth.member'])->prefix('member')->name('member.')->group(function() {
