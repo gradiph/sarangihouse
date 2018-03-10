@@ -15,6 +15,6 @@ class KakaoController extends Controller
     {
         $user = Socialite::driver('kakao')->user();
 
-        dd($user);
+//        dd($user);
     }
 }
