@@ -15,6 +15,7 @@ class User extends Authenticatable
         'kakao_id',//string, unique, nullable
         'email',//string, unique, nullable
         'password',//string
+		'level',//enum['Member', 'Admin']
     ];
 
     protected $hidden = [

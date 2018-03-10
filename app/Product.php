@@ -45,4 +45,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+	public function highlights()
+	{
+		return $this->hasMany('App\Highlight');
+	}
 }
