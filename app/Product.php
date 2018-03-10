@@ -15,6 +15,7 @@ class Product extends Model
         'id',//char(8), primary, ex: C0000001 | G0000001
         'name',//string, name include thickness and color
         'price',//integer
+		'qty',//integer
     ];
 
     protected $dates = [
