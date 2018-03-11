@@ -9,6 +9,8 @@ class Product extends Model
 {
     public $timestamps = false;
 
+	public $incrementing = false;
+
     use SoftDeletes;
 
     protected $fillable = [
