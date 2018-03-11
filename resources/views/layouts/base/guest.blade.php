@@ -21,6 +21,9 @@
 		<link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     	<link href="http://fonts.googleapis.com/css?family=Palatino+Linotype" rel="stylesheet" type="text/css">
 
+		<!-- Floating Labels CSS -->
+		<link href="{{ asset('css/floating-labels.css') }}" rel="stylesheet" type="text/css">
+
 		<!-- Custom CSS -->
 		<link href="{{ asset('css/main-template.css') }}" rel="stylesheet" type="text/css">
 		@yield('style')
