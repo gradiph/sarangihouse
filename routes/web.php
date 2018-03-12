@@ -25,8 +25,9 @@ Route::middleware(['auth.admin'])->prefix('admin')->name('admin.')->group(functi
 	Route::get('/', 'AdminController@index');
 	Route::get('/home', 'AdminController@home')->name('home');
 
-	Route::prefix('products')->name('product.')->group(function() {
-		Route::get('/list', 'ProductController')->name('list');
+	Route::prefix('products')->name('products.')->group(function() {
+		Route::get('/list', 'ProductController@dataList')->name('list');
+		Route::post('/set/session', 'ProductController@setSessionPost')->name('set.session');
 	});
 	Route::resource('/products', 'ProductController');
 });

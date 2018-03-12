@@ -21,6 +21,9 @@
 		<link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     	<link href="http://fonts.googleapis.com/css?family=Palatino+Linotype" rel="stylesheet" type="text/css">
 
+		<!-- Floating Labels CSS -->
+		<link href="{{ asset('css/floating-labels.css') }}" rel="stylesheet" type="text/css">
+
 		<!-- Custom CSS -->
 		<link href="{{ asset('css/dashboard-template.css') }}" rel="stylesheet" type="text/css">
 		@yield('style')
@@ -31,11 +34,11 @@
 		<!-- Top Navigation -->
 		<nav class="navbar sticky-top navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="#">사랑이 하우스</a>
+				<a class="navbar-brand" href="{{ route('home') }}">사랑이 하우스</a>
 
 				<div class="dropdown ml-auto">
 					<button class="btn btn-main dropdown-toggle" type="button" id="userDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						{{ Auth::user()->name }}
+						<span class="fa fa-fw fa-user"></span> {{ Auth::user()->name }}
 					</button>
 					<div class="dropdown-menu" aria-labelledby="User Dropdown Button">
 						<a class="dropdown-item" href="#">Your Profile</a>
@@ -51,16 +54,16 @@
 		<nav>
 			<ul class="nav nav-pills nav-fill bg-soft-main">
 				<li class="nav-item">
-					<a href="#" class="nav-link btn btn-soft-main active">Home</a>
+					<a href="{{ route('admin.home') }}" class="nav-link btn btn-soft-main @yield('home-menu')">Home</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link btn btn-soft-main">Orders</a>
+					<a href="#" class="nav-link btn btn-soft-main @yield('order-menu')">Orders</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link btn btn-soft-main">Products</a>
+					<a href="{{ route('admin.products.index') }}" class="nav-link btn btn-soft-main @yield('product-menu')">Products</a>
 				</li>
 				<li class="nav-item">
-					<a href="#" class="nav-link btn btn-soft-main">Highlight Products</a>
+					<a href="#" class="nav-link btn btn-soft-main @yield('highlight-menu')">Highlight Products</a>
 				</li>
 			</ul>
 		</nav>
@@ -99,6 +102,11 @@
 		<script>
 			$(document).ready(function() {
 				$('.zoom').zoom();
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
 			});
 		</script>
 		@yield('script')

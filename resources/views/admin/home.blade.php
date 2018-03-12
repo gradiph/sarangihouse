@@ -6,6 +6,10 @@
 @section('style')
 @endsection
 
+@section('home-menu')
+active
+@endsection
+
 @section('main')
 <!-- Top Dashboard -->
 <section id="top-dashboard" class="container">

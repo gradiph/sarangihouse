@@ -1,3 +1,14 @@
+/* Tag Style */
+#data th, #data td {
+	text-align: center;
+}
+
+footer {
+	background: #181818;
+	color: rgb(180,173,173);
+}
+
+/* Class Style */
 .bg-main {
 	background-color: rgb(142, 176, 55) !important;
 }
@@ -124,11 +135,6 @@ figure > img {
 	font-weight: normal;
 	font-size: 1.8em;
 	text-align: center;
-}
-
-footer {
-	background: #181818;
-	color: rgb(180,173,173);
 }
 
 #loading {
