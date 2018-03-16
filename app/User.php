@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Comment');
     }
+
+	public function errorLogs()
+	{
+		return $this->hasMany('App\ErrorLog');
+	}
 }
