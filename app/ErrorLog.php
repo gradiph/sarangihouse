@@ -11,6 +11,7 @@ class ErrorLog extends Model
 	protected $fillable = [
 		'created_at',//timestamp
 		'user_id',//unsignedBigInteger
+		'description',//string
 		'action',//string
 		'errorThrown',//longText
 		'status',//enum['Waiting', 'Process', 'Clear']

@@ -17,6 +17,7 @@ class CreateErrorLogsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamp('created_at');
 			$table->unsignedBigInteger('user_id');
+			$table->string('description');
 			$table->string('action');
 			$table->longText('errorThrown');
 			$table->enum('status', ['Waiting', 'Process', 'Clear']);
