@@ -62,6 +62,12 @@
 				<li class="nav-item">
 					<a href="#" class="nav-link btn btn-soft-main @yield('highlight-menu')">Highlight Products</a>
 				</li>
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link btn btn-soft-main @yield('log-menu') dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@yield('log-menu-name') Logs</a>
+					<div class="dropdown-menu">
+						<a href="{{ route('admin.error-logs.index') }}" class="dropdown-item">Error Logs</a>
+					</div>
+				</li>
 			</ul>
 		</nav>
 
@@ -105,6 +111,34 @@
 					}
 				});
 			});
+
+			function ajaxLoad(filename, content) {
+				content = typeof content !== "undefined" ? content : "content";
+				$("#loading").show();
+				$.ajax({
+					type: "GET",
+					url: filename,
+					contentType: false,
+					success: function (data) {
+						$("#" + content).html(data);
+						$("#loading").hide();
+					},
+					error: function (xhr, status, error) {
+						alert(error);
+						$("#loading").hide();
+						$.post(
+							"{{ route('error-logs.store') }}",
+							{
+								'created_at': "{{ date('Y-m-d H:i:s') }}",
+								'user_id': "{{ Auth::check() ? Auth::id() : NULL }}",
+								'description': error,
+								'action': filename,
+								'errorThrown': xhr.responseText,
+							}
+						);
+					}
+				});
+			}
 		</script>
 		@yield('script')
 	</body>

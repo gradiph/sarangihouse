@@ -192,6 +192,34 @@
 				$("#inputemail").val('').focus();
 				$("#inputpassword").val('');
 			});
+
+			function ajaxLoad(filename, content) {
+				content = typeof content !== "undefined" ? content : "content";
+				$("#loading").show();
+				$.ajax({
+					type: "GET",
+					url: filename,
+					contentType: false,
+					success: function (data) {
+						$("#" + content).html(data);
+						$("#loading").hide();
+					},
+					error: function (xhr, status, error) {
+						alert(error);
+						$("#loading").hide();
+						$.post(
+							"{{ route('error-logs.store') }}",
+							{
+								'created_at': "{{ date('Y-m-d H:i:s') }}",
+								'user_id': "{{ Auth::check() ? Auth::id() : NULL }}",
+								'description': error,
+								'action': filename,
+								'errorThrown': xhr.responseText,
+							}
+						);
+					}
+				});
+			}
 		</script>
 		@yield('script')
 	</body>
