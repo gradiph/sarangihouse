@@ -15,7 +15,7 @@ class CreateHighlightsTable extends Migration
     {
         Schema::create('highlights', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('product_id', 8);
+            $table->unsignedBigInteger('product_id');
             $table->string('description');
             $table->timestamps();
         });

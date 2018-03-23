@@ -10,7 +10,7 @@ class Highlight extends Model
 	use SoftDeletes;
 
     protected $fillable = [
-		'product_id',//char(8)
+		'product_id',//unsignedBigInteger
 		'description',//string
 		'category',//enum['promo', 'popular', 'new', 'best_seller', 'event']
 	];

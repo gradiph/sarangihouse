@@ -8,7 +8,7 @@ class Review extends Model
 {
     protected $fillable = [
         'user_id',//unsignedBigInteger
-        'product_id',//char(8)
+        'product_id',//unsignedBigInteger
         'rating',//integer(1)
         'text',//string
     ];

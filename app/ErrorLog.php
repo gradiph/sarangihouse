@@ -10,7 +10,7 @@ class ErrorLog extends Model
 
 	protected $fillable = [
 		'created_at',//timestamp
-		'user_id',//unsignedBigInteger
+		'user_id',//unsignedBigInteger, nullable()
 		'description',//string
 		'action',//string
 		'errorThrown',//longText

@@ -10,7 +10,7 @@ class Rating extends Model
 
     protected $fillable = [
         'user_id',//unsignedBigInteger
-        'product_id',//char(8)
+        'product_id',//unsignedBigInteger
         'value',//integer(1)
         'created_at',//timestamp
     ];

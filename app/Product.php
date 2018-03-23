@@ -9,12 +9,10 @@ class Product extends Model
 {
     public $timestamps = false;
 
-	public $incrementing = false;
-
     use SoftDeletes;
 
     protected $fillable = [
-        'id',//char(8), primary, ex: C0000001 | G0000001
+        'code',//char(8), ex: C0000001 | G0000001
         'name',//string, name include thickness and color
         'price',//integer
 		'qty',//integer
