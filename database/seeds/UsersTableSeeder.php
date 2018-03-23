@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
 			'name' => 'Gradi',
 			'email' => 'gradiph@gmail.com',
 			'password' => bcrypt('kamusdota'),
+			'level' => 'Admin',
 		]);
 
         factory(App\User::class, 3)->create();
