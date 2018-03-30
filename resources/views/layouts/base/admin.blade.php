@@ -41,7 +41,10 @@
 						<a class="dropdown-item" href="#">Your Profile</a>
 						<a class="dropdown-item" href="#">Another action</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{{ route('logout') }}">Log Out</a>
+						<a class="dropdown-item" href="#logout" onclick="$('#logout-form').submit()">Log Out</a>
+						<form id="logout-form" action="{{ route('logout') }}" method="post">
+							{{ csrf_field() }}
+						</form>
 					</div>
 				</div>
 			</div>
