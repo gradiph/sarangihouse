@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RedirectRequest;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -46,6 +47,15 @@ class HomeController extends Controller
 			'alert_type' => 'alert-danger',
 			'alert_title' => 'Warning!',
 			'alert_messages' => 'Something is wrong. Please try again. (Code: L02)',
+		]);
+	}
+
+	public function redirect(RedirectRequest $request)
+	{
+		return redirect()->route($request->link)->with([
+			'alert_type' => $request->alert_type,
+			'alert_title' => $request->alert_title,
+			'alert_messages' => $request->alert_messages,
 		]);
 	}
 }
