@@ -24,19 +24,39 @@ active
 		</h2>
 	</section>
 
+	<!-- ALert -->
+	<section id="product-alert" class="mt-3">
+		@if(session('alert_type'))
+			@component('alert')
+				@slot('type')
+					{{ session('alert_type') }}
+				@endslot
+				@slot('title')
+					{{ session('alert_title') }}
+				@endslot
+				{{ session('alert_messages') }}
+			@endcomponent
+		@endisset
+	</section>
+
 	<!-- Filter -->
 	<section id="product-filter" class="mt-3 collapse {{ session('product_filter', 'show') == 'show' ? 'show' : '' }}">
 		<form id="form-filter">
 			<div class="row">
 				<div class="col">
-					<div class="form-label-group">
-						<input type="text" id="inputName" class="form-control" placeholder="Name" autofocus>
-						<label for="inputName">Name</label>
-					</div>
+					<input type="text" id="inputSearch" class="form-control" placeholder="Name" autofocus>
 				</div>
 
 				<div class="col-auto">
-					<select id="inputLimit" class="form-control form-control-lg">
+					<select id="inputType" class="form-control">
+						<option value="All" {{ session('product_type', 'All') == 'All' ? 'selected' : '' }}>Bracelet & Ring</option>
+						<option value="Bracelet" {{ session('product_type', 'All') == 'Bracelet' ? 'selected' : '' }}>Bracelet</option>
+						<option value="Ring" {{ session('product_type', 'All') == 'Ring' ? 'selected' : '' }}>Ring</option>
+					</select>
+				</div>
+
+				<div class="col-auto">
+					<select id="inputLimit" class="form-control">
 						<option value="6" {{ session('product_limit', '6') == '6' ? 'selected' : '' }}>Show 6 Per Page</option>
 						<option value="10" {{ session('product_limit', '6') == '10' ? 'selected' : '' }}>Show 10 Per Page</option>
 						<option value="25" {{ session('product_limit', '6') == '25' ? 'selected' : '' }}>Show 25 Per Page</option>
@@ -44,7 +64,7 @@ active
 				</div>
 
 				<div class="col-auto">
-					<select id="inputStatus" class="form-control form-control-lg">
+					<select id="inputStatus" class="form-control">
 						<option value="active" {{ session('product_status', 'active') == 'active' ? 'selected' : '' }}>Only Active</option>
 						<option value="inactive" {{ session('product_status', 'active') == 'inactive' ? 'selected' : '' }}>Only Inactive</option>
 						<option value="all" {{ session('product_status', 'active') == 'all' ? 'selected' : '' }}>Show All</option>
@@ -55,11 +75,11 @@ active
 				<div class="w-100 d-block d-md-none"></div>
 
 				<div class="col-6 col-md-auto">
-					<button type="submit" id="apply-btn" class="btn btn-block btn-lg btn-main">Apply</button>
+					<button type="submit" id="apply-btn" class="btn btn-block btn-main">Apply</button>
 				</div>
 
 				<div class="col-6 col-md-auto">
-					<button type="reset" id="apply-btn" class="btn btn-block btn-lg btn-main">Reset</button>
+					<button type="reset" id="apply-btn" class="btn btn-block btn-main">Reset</button>
 				</div>
 			</div>
 		</form>
@@ -84,7 +104,7 @@ active
 	ajaxLoad("{{ route('admin.products.list') }}", "product-data");
 
 	$("#product-filter")
-		.on('hide.bs.collapse', function () {
+		.on("hide.bs.collapse", function () {
 			$("#filter-collapse-btn").removeClass("active");
 			$.post(
 				"{{ route('admin.products.set.session') }}",
@@ -99,7 +119,7 @@ active
 				}
 			);
 		})
-		.on('show.bs.collapse', function () {
+		.on("show.bs.collapse", function () {
 			$("#filter-collapse-btn").addClass("active");
 			$.post(
 				"{{ route('admin.products.set.session') }}",
@@ -114,24 +134,28 @@ active
 				}
 			);
 		})
-		.on('shown.bs.collapse', function () {
-			$("#inputName").focus();
+		.on("shown.bs.collapse", function () {
+			$("#inputSearch").focus();
 		})
-		.on('hidden.bs.collapse', function () {
+		.on("hidden.bs.collapse", function () {
 			$("#filter-collapse-btn").blur();
 		});
 
 	$("#form-filter")
 		.submit(function(e) {
 			e.preventDefault();
-			ajaxLoad("{{ route('admin.products.list') }}?ok_name=1&name=" + $("#inputName").val(), "product-data");
+			ajaxLoad("{{ route('admin.products.list') }}?ok_name=1&name=" + $("#inputSearch").val(), "product-data");
 		})
-		.on('reset', function(e)
+		.on("reset", function(e)
 		{
 			setTimeout(function() {
-				$("#inputName").focus();
+				$("#inputSearch").focus();
 			});
 		});
+
+	$("#inputType").change(function() {
+		ajaxLoad("{{ route('admin.products.list') }}?ok_type=1&type=" + $("#inputType").val(), "product-data");
+	});
 
 	$("#inputLimit").change(function() {
 		ajaxLoad("{{ route('admin.products.list') }}?ok_limit=1&limit=" + $("#inputLimit").val(), "product-data");

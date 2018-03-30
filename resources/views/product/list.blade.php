@@ -5,11 +5,18 @@
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">
+					<a href="#sort" class="sort-btn text-light" data-link="{{ route('admin.products.list') }}?ok_order=1&type_order=code&value_order={{ session('product_value_order') == 'asc' ? 'desc' : 'asc' }}">
+						Code
+						@if(session('product_type_order') == 'code') <span class="fa fa-sort-alpha-{{ session('product_value_order') }}"></span> @endif
+					</a>
+				</th>
+				<th scope="col">
 					<a href="#sort" class="sort-btn text-light" data-link="{{ route('admin.products.list') }}?ok_order=1&type_order=name&value_order={{ session('product_value_order') == 'asc' ? 'desc' : 'asc' }}">
 						Name
 						@if(session('product_type_order') == 'name') <span class="fa fa-sort-alpha-{{ session('product_value_order') }}"></span> @endif
 					</a>
 				</th>
+				<th scope="col">Type</th>
 				<th scope="col">
 					<a href="#sort" class="sort-btn text-light" data-link="{{ route('admin.products.list') }}?ok_order=1&type_order=price&value_order={{ session('product_value_order') == 'asc' ? 'desc' : 'asc' }}">
 						Price
@@ -30,7 +37,9 @@
 			@foreach($products as $product)
 				<tr>
 					<th scope="col">{{ ++$i }}</th>
-					<td><a href="#show" class="show-btn" data-link="{{ route('admin.products.show', ['product' => $product->id]) }}">{{ str_limit($product->name, 20) }}</a></td>
+					<td><a href="#show" class="show-btn" data-link="{{ route('admin.products.show', ['product' => $product->id]) }}">{{ $product->code }}</a></td>
+					<td>{{ str_limit($product->name, 20) }}</td>
+					<td>{{ str_is('G*', $product->code) ? 'Bracelet' : 'Ring' }}</td>
 					<td>{{ indo_currency($product->price) }}</td>
 					<td>{{ indo_currency($product->qty) }}</td>
 					<td>{!! $product->trashed() ? '<span class="text-danger">Inactive</span>' : '<span class="text-success">Active</span>' !!}</td>
@@ -52,7 +61,7 @@
 	Hint:
 	<ul>
 		<li>Click on the table heading to sort</li>
-		<li>Click on the product's name to show product's detail</li>
+		<li>Click on the product name to show product detail</li>
 	</ul>
 </article>
 
@@ -70,10 +79,9 @@
 	$("a.show-btn").click(function(e) {
 		var btn = $(this);
 		e.preventDefault();
-		console.log(btn.data("link"));
-		$(".loading").show();
+		$("#loading").show();
 		$("#product-modal").modal("show").find(".modal-content").empty().load(btn.data("link"), function() {
-			$(".loading").hide();
+			$("#loading").hide();
 		});
 	});
 </script>
