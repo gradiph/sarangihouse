@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductSetSessionRequest;
+use App\Http\Requests\ProductResourceRequest;
 use Illuminate\Http\Request;
 use App\Product;
 use App\UserLog;
@@ -18,12 +19,50 @@ class ProductController extends Controller
 
     public function create()
     {
-        //
+        return view('product.create');
     }
 
-    public function store(Request $request)
+    public function store(ProductResourceRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+		//create product
+		$product = Product::create([
+			'code' => $request->code,
+			'name' => $request->name,
+			'price' => $request->price,
+			'qty' => $request->qty,
+		]);
+
+		if($product)
+		{
+			//create model UserLog
+			$log = UserLog::create([
+				'created_at' => date('Y-m-d H:i:s'),
+				'user_id' => Auth::id(),
+				'description' => 'Product #' . $product->id . ': create product',
+			]);
+
+			if($log) {
+				goto success;
+			}
+		}
+
+		DB::rollBack();
+		return response()->json([
+			'status' => 'fail',
+			'alert_messages' => 'Terjadi kesalahan.',
+		]);
+
+		success:
+		DB::commit();
+		return response()->json([
+			'status' => 'success',
+			'link' => 'admin.products.index',
+			'alert_type' => 'alert-success',
+			'alert_title' => 'Success!',
+			'alert_messages' => 'Product ' . $product->name . ' is created.',
+		]);
     }
 
     public function show($product)
@@ -35,14 +74,7 @@ class ProductController extends Controller
 		]);
     }
 
-    public function edit(Product $product)
-    {
-		return view('product.edit')->with([
-			'product' => $product,
-		]);
-    }
-
-    public function update(Request $request, $product)
+    public function update(ProductResourceRequest $request, $product)
     {
         DB::beginTransaction();
 

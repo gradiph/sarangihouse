@@ -19,6 +19,7 @@ active
 		<h2>
 			Products Management
 			<div class="pull-right">
+				<button id="create-btn" class="btn btn-success" type="button" data-link="{{ route('admin.products.create') }}">Create Product</button>
 				<a id="filter-collapse-btn" class="btn btn-outline-primary {{ session('product_filter', 'show') == 'show' ? 'active' : '' }}" href="#product-filter" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="product-filter">Show Filters</a>
 			</div>
 		</h2>
@@ -163,6 +164,14 @@ active
 
 	$("#inputStatus").change(function() {
 		ajaxLoad("{{ route('admin.products.list') }}?ok_status=1&status=" + $("#inputStatus").val(), "product-data");
+	});
+
+	$("#create-btn").click(function() {
+		var btn = $(this);
+		$("#loading").show();
+		$("#product-modal").modal("show").find(".modal-content").empty().load(btn.data("link"), function() {
+			$("#loading").hide();
+		});
 	});
 </script>
 @endsection

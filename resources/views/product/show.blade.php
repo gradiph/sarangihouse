@@ -37,23 +37,23 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="inputCode">Code</label>
-			<input type="text" id="inputCode" class="form-control" name="code" required placeholder="Product code" value="{{ $product->code }}" maxlength="8">
+			<input type="text" id="inputCode" class="form-control" name="code" required placeholder="Product code" value="{{ old('code', $product->code) }}" maxlength="8">
 		</div>
 
 		<div class="form-group">
 			<label for="inputName">Name</label>
-			<input type="text" id="inputName" class="form-control" name="name" required placeholder="Product name" value="{{ $product->name }}">
+			<input type="text" id="inputName" class="form-control" name="name" required placeholder="Product name" value="{{ old('name', $product->name) }}">
 		</div>
 
 		<div class="form-group">
 			<label for="inputPrice">Price</label>
-			<input type="text" id="inputPrice" class="form-control" name="price" required placeholder="Product price (only number)" value="{{ $product->price }}">
+			<input type="text" id="inputPrice" class="form-control" name="price" required placeholder="Product price (only number)" value="{{ old('price', $product->price) }}">
 		</div>
 
 		<div class="form-group">
 			<label for="inputQty">Qty</label>
 			<div class="input-group">
-				<input type="text" id="inputQty" class="form-control" name="qty" required placeholder="Product qty (only number)" value="{{ $product->qty }}">
+				<input type="text" id="inputQty" class="form-control" name="qty" required placeholder="Product qty (only number)" value="{{ old('qty', $product->qty) }}">
 				<div class="input-group-append">
 					<button class="btn btn-outline-secondary" type="button" onclick="calculate(5)">+5</button>
 					<button class="btn btn-outline-secondary" type="button" onclick="calculate(1)">+1</button>
